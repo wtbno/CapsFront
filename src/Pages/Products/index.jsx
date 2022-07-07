@@ -44,7 +44,7 @@ export default function Products() {
           <Image className="pillsimg" src="/box.png" />
           <Input className="iptArea" placeholder="Codigo do Produto" />
           <Input className="iptArea" placeholder="Descrição do Produto" />
-          <Input className="iptArea" placeholder="Unidade de Medida" />
+          <Input type="number" className="iptArea" placeholder="Unidade de Medida" />
           <Input
             id="valor"
             onChange={(e) => setBuyPrice(currencyFormater(e.target.value))}
