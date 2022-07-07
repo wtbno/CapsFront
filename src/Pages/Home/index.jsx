@@ -17,30 +17,28 @@ export default function Home() {
 
   return (
     <>
-    {!isLoading &&(
-    <div
-      style={{ backgroundImage: "url(" + "bgimg2.jpg" + ")" }}
-      className="root"
-    >
-      <div className="LoginMenu">
-        <p style={{ color: "#fff" }}>Bem vindo!</p>
-        <Button
-          className="btnLgn"
-          type="primary"
-          onClick={() => {
-            navigation("/create");
-          }}
+      {!isLoading && (
+        <div
+          style={{ backgroundImage: "url(" + "bgimg2.jpg" + ")" }}
+          className="root"
         >
-          Entrar e realizar cadastro
-        </Button>
+          <div className="LoginMenu">
+            <p style={{ color: "#fff" }}>Bem vindo!</p>
+            <Button
+              className="btnLgn"
+              type="primary"
+              onClick={() => {
+                navigation("/create");
+              }}
+            >
+              Entrar e realizar cadastro
+            </Button>
+          </div>
+        </div>
+      )}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {isLoading && <Spin size="large" style={{ marginTop: "15rem" }} />}
       </div>
-    </div>
-    )}
-    <div style={{display:'flex', flexDirection:'column'}}>
-    {isLoading && (
-          <Spin size="large" style={{marginTop:'15rem'}} />
-        )}
-   </div>
     </>
   );
 }

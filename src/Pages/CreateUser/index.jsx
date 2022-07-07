@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Image, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
@@ -19,14 +19,12 @@ const barBtn = {
 };
 
 export default function CreateUser() {
-
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 800);
   }, []);
-
 
   function showPass() {
     const tipo = document.getElementById("senha");
@@ -39,49 +37,45 @@ export default function CreateUser() {
   const navigation = useNavigate();
   return (
     <>
-    
       <NavBar />
-         {isLoading ? (
-           <div style={{display:'flex', flexDirection:'column'}}>
-          <Spin size="large" style={{marginTop:'15rem'}}/>
-          </div>
-        ) : (
-      <div
-        style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
-        className="root"
-      >
-     
-        <div className="createBox">
-          <p>Criar novo usuário</p>
-          <Image className="pillsimg" src="/user1.png" />
-          <Input className="iptArea" placeholder="Nome" />
-          <Input className="iptArea" placeholder="Usuario" />
-  
-          <Input
-            EyeTwoTone
-            type="password"
-            id="senha"
-            name="senha"
-            className="iptArea"
-            placeholder=" Digite sua senha"
-          />
-          <Button type="ghost" onClick={() => showPass()}>
-            <EyeTwoTone />
-          </Button>
-
-          <Button
-            onClick={() => {
-              navigation("/register");
-            }}
-            className="submitBtn"
-            style={submitBtn}
-            ghost
-          >
-            Cadastrar
-          </Button>
+      {isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Spin size="large" style={{ marginTop: "15rem" }} />
         </div>
-        
-      </div>
+      ) : (
+        <div
+          style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
+          className="root"
+        >
+          <div className="createBox">
+            <p>Criar novo usuário</p>
+            <img className="userAdd" src="/user1.png" />
+            <Input className="iptArea" placeholder="Nome" />
+            <Input className="iptArea" placeholder="Usuario" />
+            <Input
+              EyeTwoTone
+              type="password"
+              id="senha"
+              name="senha"
+              className="iptArea"
+              placeholder=" Digite sua senha"
+            />
+            <Button type="ghost" onClick={() => showPass()}>
+              <EyeTwoTone />
+            </Button>
+
+            <Button
+              onClick={() => {
+                navigation("/register");
+              }}
+              className="submitBtn"
+              style={submitBtn}
+              ghost
+            >
+              Cadastrar
+            </Button>
+          </div>
+        </div>
       )}
     </>
   );

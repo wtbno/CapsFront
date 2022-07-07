@@ -33,13 +33,11 @@
   background-color: #e8f8e8;
 }
 
-
-
-.regArea{
+.regArea {
   width: 80%;
 }
 
-.submitBtn{
-  color:'green';
-  border:'1px green solid'
+.submitBtn {
+  color: "green";
+  border: "1px green solid";
 }

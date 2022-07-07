@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
-import { Table } from "antd";
+import { Table, Spin } from "antd";
 import NavBar from "../../Components/NavBar";
-import './style.css'
+import "./style.css";
 
 export default function TableControl() {
   // Sample Data for the table
@@ -35,28 +35,43 @@ export default function TableControl() {
     },
   ];
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+  }, []);
+
   return (
     <>
       <NavBar />
-      <h4>Monitoramento de pedidos</h4>
-      <div className="root">
-      <div
-        style={{
-          border: "solid 1px #5fd",
-          display: "flex",
-          width: "90%",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
-        <div className="firstTable">
-          <Table dataSource={approvedOrders} columns={columns} />
+      {isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Spin size="large" style={{ marginTop: "15rem" }} />
         </div>
-        <div className="secondTable">
-          <Table dataSource={ordersInProcess} columns={columns} />
+      ) : (
+        <div>
+          <h4>Monitoramento de pedidos</h4>
+          <div className="root">
+            <div
+              style={{
+                border: "solid 1px #5fd",
+                display: "flex",
+                width: "90%",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+              }}
+            >
+              <div className="firstTable">
+                <Table dataSource={approvedOrders} columns={columns} />
+              </div>
+              <div className="secondTable">
+                <Table dataSource={ordersInProcess} columns={columns} />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
+      )}
     </>
   );
 }

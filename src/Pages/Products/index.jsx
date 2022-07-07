@@ -1,5 +1,5 @@
-import { Button, Input, Image, InputNumber } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { Button, Input, Image, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import NavBar from "../../Components/NavBar";
@@ -32,45 +32,62 @@ export default function Products() {
     return newValue;
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+  }, []);
+
   return (
     <>
       <NavBar />
-      <div
-        style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
-        className="root"
-      >
-        <div className="regBox">
-          <p>Cadastrar produtos</p>
-          <Image className="pillsimg" src="/box.png" />
-          <Input className="iptArea" placeholder="Codigo do Produto" />
-          <Input className="iptArea" placeholder="Descrição do Produto" />
-          <Input type="number" className="iptArea" placeholder="Unidade de Medida" />
-          <Input
-            id="valor"
-            onChange={(e) => setBuyPrice(currencyFormater(e.target.value))}
-            className="iptArea"
-            placeholder="Valor de Compra R$"
-            value={buyPrice}
-          />
-          <Input
-            onChange={(e) => currencyFormater(setSalePrice(e.target.value))}
-            className="iptArea"
-            placeholder="Preço de Venda R$"
-            value={salePrice}
-          />
-
-          <Button
-            onClick={() => {
-              navigation("/chart");
-            }}
-            className="submitBtn"
-            style={submitBtn}
-            ghost
-          >
-            Cadastrar
-          </Button>
+      {isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Spin size="large" style={{ marginTop: "15rem" }} />
         </div>
-      </div>
+      ) : (
+        <div
+          style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
+          className="root"
+        >
+          <div className="regBox">
+            <p>Cadastrar produtos</p>
+            <img className="pillsimg" src="/box.png" />
+            <Input className="iptArea" placeholder="Codigo do Produto" />
+            <Input className="iptArea" placeholder="Descrição do Produto" />
+            <Input
+              type="number"
+              className="iptArea"
+              placeholder="Unidade de Medida"
+            />
+            <Input
+              id="valor"
+              onChange={(e) => setBuyPrice(currencyFormater(e.target.value))}
+              className="iptArea"
+              placeholder="Valor de Compra R$"
+              value={buyPrice}
+            />
+            <Input
+              onChange={(e) => setSalePrice(currencyFormater(e.target.value))}
+              className="iptArea"
+              placeholder="Preço de Venda R$"
+              value={salePrice}
+            />
+
+            <Button
+              onClick={() => {
+                navigation("/chart");
+              }}
+              className="submitBtn"
+              style={submitBtn}
+              ghost
+            >
+              Cadastrar
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

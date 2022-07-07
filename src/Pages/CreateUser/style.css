@@ -34,20 +34,15 @@
   background-color: #e8f8e8;
 }
 
-
-
-.iptArea{
+.iptArea {
   max-width: 50%;
 }
 
-.submitBtn{
-  color:'green';
-  border:'1px green solid'
+.submitBtn {
+  color: "green";
+  border: "1px green solid";
 }
 
-.lnr-eye {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
+.userAdd {
+  pointer-events: none;
 }
