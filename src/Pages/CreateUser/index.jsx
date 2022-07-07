@@ -19,6 +19,9 @@ const barBtn = {
 };
 
 export default function CreateUser() {
+
+  
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -47,7 +50,7 @@ export default function CreateUser() {
           style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
           className="root"
         >
-          <div className="createBox">
+          <div className="createUserBox">
             <p>Criar novo usuário</p>
             <img className="userAdd" src="/user1.png" />
             <Input className="iptArea" placeholder="Nome" />
@@ -60,7 +63,11 @@ export default function CreateUser() {
               className="iptArea"
               placeholder=" Digite sua senha"
             />
-            <Button type="ghost" onClick={() => showPass()}>
+            <Button
+              style={{ borderRadius: "30px", border: "1px solid #336d0d" }}
+              type="ghost"
+              onClick={() => showPass()}
+            >
               <EyeTwoTone />
             </Button>
 

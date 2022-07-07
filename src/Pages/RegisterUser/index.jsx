@@ -38,7 +38,7 @@ export default function RegisterUser() {
           style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
           className="root"
         >
-          <div className="createBox">
+          <div className="newClientBox">
             <p>Cadastrar novo cliente</p>
          
               <img className="pillsimg" src="/user1.png" />

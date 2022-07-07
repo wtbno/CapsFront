@@ -17,7 +17,11 @@ export default function Home() {
 
   return (
     <>
-      {!isLoading && (
+       {isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Spin size="large" style={{ marginTop: "15rem" }} />
+        </div>
+      ) : (
         <div
           style={{ backgroundImage: "url(" + "bgimg2.jpg" + ")" }}
           className="root"
@@ -36,9 +40,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {isLoading && <Spin size="large" style={{ marginTop: "15rem" }} />}
-      </div>
+   
     </>
   );
 }

@@ -20,15 +20,15 @@
   justify-content: space-around;
 }
 
-.createBox {
+.createUserBox {
   display: flex;
   border: 1px solid #336d0d;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  height: 50vh;
+  height: 70vh;
   max-width: 50%;
-  width: 40%;
+  width: 30%;
   border-radius: 10px;
   padding: 5px;
   background-color: #e8f8e8;
