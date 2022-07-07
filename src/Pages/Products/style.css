@@ -1,4 +1,4 @@
-@import "antd/dist/antd.css";
+/* @import "antd/dist/antd.css"; */
 
 .root {
   display: flex;
@@ -20,24 +20,23 @@
   justify-content: space-around;
 }
 
-.createBox {
+.regBox {
   display: flex;
   border: 1px solid #336d0d;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  height: 50vh;
+  height: 90vh;
   max-width: 50%;
   width: 40%;
   border-radius: 10px;
-  padding: 5px;
   background-color: #e8f8e8;
 }
 
 
 
-.iptArea{
-  max-width: 50%;
+.regArea{
+  width: 80%;
 }
 
 .submitBtn{

@@ -6,17 +6,17 @@ import "./style.css";
 const submitBtn = {
   color: "green",
   border: "1px green solid",
-  borderRadius: "10px",
+  borderRadius:"10px"
 };
 
 const barBtn = {
   color: "green",
   border: "1px green solid",
-  borderRadius: "10px",
-  maxWidth: "50%",
-};
+  borderRadius:"10px",
+  maxWidth: '50%'
+}
 
-export default function CreateUser() {
+export default function RegisterUser() {
   const navigation = useNavigate();
   return (
     <>
@@ -37,19 +37,14 @@ export default function CreateUser() {
         className="root"
       >
         <div className="createBox">
-          <p>Criar novo usuário</p>
+          <p>Cadastrar produtos</p>
           <Image className="pillsimg" src="/user1.png" />
-          <Input className="iptArea" placeholder="Nome" />
-          <Input className="iptArea" placeholder="Usuario" />
-          <Input className="iptArea" placeholder="Senha" />
-          <Button
-            onClick={() => {
-              navigation("/register");
-            }}
-            className="submitBtn"
-            style={submitBtn}
-            ghost
-          >
+          <Input className="iptArea" placeholder="Razão Social" />
+          <Input className="iptArea" placeholder="CNPJ" />
+          <Input className="iptArea" placeholder="Endereço" />
+          <Button  onClick={() => {
+              navigation("/requests");
+            }} className="submitBtn" style={submitBtn} ghost>
             Cadastrar
           </Button>
         </div>

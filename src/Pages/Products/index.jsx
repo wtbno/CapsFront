@@ -1,7 +1,7 @@
 import { Button, Input, Image } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import './style.css'
 
 const submitBtn = {
   color: "green",
@@ -16,7 +16,7 @@ const barBtn = {
   maxWidth: "50%",
 };
 
-export default function CreateUser() {
+export default function Products() {
   const navigation = useNavigate();
   return (
     <>
@@ -36,20 +36,18 @@ export default function CreateUser() {
         style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
         className="root"
       >
-        <div className="createBox">
-          <p>Criar novo usuário</p>
-          <Image className="pillsimg" src="/user1.png" />
-          <Input className="iptArea" placeholder="Nome" />
-          <Input className="iptArea" placeholder="Usuario" />
-          <Input className="iptArea" placeholder="Senha" />
-          <Button
-            onClick={() => {
-              navigation("/register");
-            }}
-            className="submitBtn"
-            style={submitBtn}
-            ghost
-          >
+        <div className="regBox">
+          <p>Cadastrar produtos</p>
+          <Image className="pillsimg" src="/box.png" />
+          <Input className="iptArea" placeholder="Codigo do Produto" />
+          <Input className="iptArea" placeholder="Descrição do Produto" />
+          <Input className="iptArea" placeholder="Unidade de Medida" />
+          <Input className="iptArea" placeholder=" Valor de Compra" />
+          <Input className="iptArea" placeholder="Preço de Venda" />
+
+          <Button  onClick={() => {
+              navigation("/chart");
+            }} className="submitBtn" style={submitBtn} ghost>
             Cadastrar
           </Button>
         </div>
