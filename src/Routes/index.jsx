@@ -6,6 +6,7 @@ import Products from "../Pages/Products";
 import RegisterUser from "../Pages/RegisterUser";
 import TableControl from "../Pages/Chart";
 
+
 export default function MainRoutes() {
   return (
     <>

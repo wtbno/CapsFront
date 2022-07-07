@@ -2,6 +2,7 @@ import { Button, Input, Image } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import NavBar from "../../Components/NavBar";
 
 const submitBtn = {
   color: "green",
@@ -20,18 +21,7 @@ export default function CreateUser() {
   const navigation = useNavigate();
   return (
     <>
-      <div className="navBar">
-        <Image
-          onClick={() => {
-            navigation("/");
-          }}
-          className="pillsimg"
-          src="/pills3.png"
-        />
-        <Button style={barBtn}>Cadastro de clientes</Button>
-        <Button style={barBtn}>Cadastro Produtos</Button>
-        <Button style={barBtn}>Cadastro de pedidos</Button>
-      </div>
+      <NavBar/>
       <div
         style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
         className="root"

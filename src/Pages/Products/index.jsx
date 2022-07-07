@@ -1,7 +1,9 @@
-import { Button, Input, Image } from "antd";
+import { Button, Input, Image, InputNumber } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './style.css'
+import "./style.css";
+import NavBar from "../../Components/NavBar";
+import { useState } from "react";
 
 const submitBtn = {
   color: "green",
@@ -17,21 +19,22 @@ const barBtn = {
 };
 
 export default function Products() {
+  const [buyPrice, setBuyPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+
   const navigation = useNavigate();
+  const currencyFormater = (value) => {
+    // only numbers from value
+    let newValue = value;
+    newValue = newValue.replace(/\D/g, "");
+    newValue = newValue.replace(/(\d)(\d{2})$/, "$1,$2");
+    newValue = newValue.replace(/(?=(\d{3})+(\D))\B/g, ".");
+    return newValue;
+  };
+
   return (
     <>
-      <div className="navBar">
-        <Image
-          onClick={() => {
-            navigation("/");
-          }}
-          className="pillsimg"
-          src="/pills3.png"
-        />
-        <Button style={barBtn}>Cadastro de clientes</Button>
-        <Button style={barBtn}>Cadastro Produtos</Button>
-        <Button style={barBtn}>Cadastro de pedidos</Button>
-      </div>
+      <NavBar />
       <div
         style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
         className="root"
@@ -42,12 +45,28 @@ export default function Products() {
           <Input className="iptArea" placeholder="Codigo do Produto" />
           <Input className="iptArea" placeholder="Descrição do Produto" />
           <Input className="iptArea" placeholder="Unidade de Medida" />
-          <Input className="iptArea" placeholder=" Valor de Compra" />
-          <Input className="iptArea" placeholder="Preço de Venda" />
+          <Input
+            id="valor"
+            onChange={(e) => setBuyPrice(currencyFormater(e.target.value))}
+            className="iptArea"
+            placeholder="Valor de Compra R$"
+            value={buyPrice}
+          />
+          <Input
+            onChange={(e) => currencyFormater(setSalePrice(e.target.value))}
+            className="iptArea"
+            placeholder="Preço de Venda R$"
+            value={salePrice}
+          />
 
-          <Button  onClick={() => {
+          <Button
+            onClick={() => {
               navigation("/chart");
-            }} className="submitBtn" style={submitBtn} ghost>
+            }}
+            className="submitBtn"
+            style={submitBtn}
+            ghost
+          >
             Cadastrar
           </Button>
         </div>
