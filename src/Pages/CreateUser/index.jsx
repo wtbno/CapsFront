@@ -1,5 +1,5 @@
-import { Button, Input, Image } from "antd";
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { Button, Input, Image, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import NavBar from "../../Components/NavBar";
@@ -19,6 +19,15 @@ const barBtn = {
 };
 
 export default function CreateUser() {
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+  }, []);
+
+
   function showPass() {
     const tipo = document.getElementById("senha");
     if (tipo.type === "password") {
@@ -30,17 +39,24 @@ export default function CreateUser() {
   const navigation = useNavigate();
   return (
     <>
+    
       <NavBar />
+         {isLoading ? (
+           <div style={{display:'flex', flexDirection:'column'}}>
+          <Spin size="large" style={{marginTop:'15rem'}}/>
+          </div>
+        ) : (
       <div
         style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
         className="root"
       >
+     
         <div className="createBox">
           <p>Criar novo usuário</p>
           <Image className="pillsimg" src="/user1.png" />
           <Input className="iptArea" placeholder="Nome" />
           <Input className="iptArea" placeholder="Usuario" />
-          <div></div>
+  
           <Input
             EyeTwoTone
             type="password"
@@ -64,7 +80,9 @@ export default function CreateUser() {
             Cadastrar
           </Button>
         </div>
+        
       </div>
+      )}
     </>
   );
 }
