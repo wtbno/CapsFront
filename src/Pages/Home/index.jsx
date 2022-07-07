@@ -24,7 +24,7 @@ export default function Home() {
   };
   return (
     <div
-      style={{ backgroundImage: "url(" + "soshands.jpg" + ")" }}
+      style={{ backgroundImage: "url(" + "backimg.jpeg" + ")" }}
       className="root"
     >
       <div className="LoginMenu">
