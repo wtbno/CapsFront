@@ -19,8 +19,11 @@ const barBtn = {
 };
 
 export default function Products() {
+  const [productCode, setProductCode] = useState("");
+  const [productDesc, setProductDesc] = useState("");
   const [buyPrice, setBuyPrice] = useState("");
   const [salePrice, setSalePrice] = useState("");
+  const [unitMeas, setUnitMeas] = useState("");
 
   const navigation = useNavigate();
   const currencyFormater = (value) => {
@@ -54,12 +57,24 @@ export default function Products() {
           <div className="regBox">
             <p>Cadastrar produtos</p>
             <img className="pillsimg" src="/box.png" />
-            <Input className="iptArea" placeholder="Codigo do Produto" />
-            <Input className="iptArea" placeholder="Descrição do Produto" />
+            <Input
+              onChange={(e) => setProductCode(e.target.value)}
+              className="iptArea"
+              placeholder="Codigo do Produto"
+              value={productCode}
+            />
+            <Input
+              onChange={(e) => setProductDesc(e.target.value)}
+              className="iptArea"
+              placeholder="Descrição do Produto"
+              value={productDesc}
+            />
             <Input
               type="number"
               className="iptArea"
               placeholder="Unidade de Medida"
+              onChange={(e) => setUnitMeas(e.target.value)}
+              value={unitMeas}
             />
             <Input
               id="valor"

@@ -18,6 +18,9 @@ const barBtn = {
 };
 
 export default function RegisterUser() {
+  const [corpName, setCorpName] = useState();
+  const [cnpj, setCnpj] = useState();
+  const [adress, setAdress] = useState();
   const navigation = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -40,13 +43,33 @@ export default function RegisterUser() {
         >
           <div className="newClientBox">
             <p>Cadastrar novo cliente</p>
-         
-              <img className="pillsimg" src="/user1.png" />
-   
 
-            <Input className="iptArea" placeholder="Razão Social" />
-            <Input className="iptArea" placeholder="CNPJ" />
-            <Input className="iptArea" placeholder="Endereço" />
+            <img className="pillsimg" src="/user1.png" />
+
+            <Input
+              onChange={(e) => {
+                setCorpName(e.target.value);
+              }}
+              className="iptArea"
+              placeholder="Razão Social"
+              value={corpName}
+            />
+            <Input
+              onChange={(e) => {
+                setCnpj(e.target.value);
+              }}
+              className="iptArea"
+              placeholder="CNPJ"
+              value={cnpj}
+            />
+            <Input
+              onChange={(e) => {
+                setAdress(e.target.value);
+              }}
+              className="iptArea"
+              placeholder="Endereço"
+              value={adress}
+            />
             <Button
               onClick={() => {
                 navigation("/products");

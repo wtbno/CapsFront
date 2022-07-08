@@ -19,8 +19,9 @@ const barBtn = {
 };
 
 export default function CreateUser() {
-
-  
+  const [name, setName] = useState();
+  const [userId, setUserId] = useState();
+  const [password, setPassword] = useState();
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -53,8 +54,22 @@ export default function CreateUser() {
           <div className="createUserBox">
             <p>Criar novo usuário</p>
             <img className="userAdd" src="/user1.png" />
-            <Input className="iptArea" placeholder="Nome" />
-            <Input className="iptArea" placeholder="Usuario" />
+            <Input
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              className="iptArea"
+              placeholder="Nome"
+              value={name}
+            />
+            <Input
+              onChange={(e) => {
+                setUserId(e.target.value);
+              }}
+              className="iptArea"
+              placeholder="Usuario"
+              value={userId}
+            />
             <Input
               EyeTwoTone
               type="password"
@@ -62,6 +77,9 @@ export default function CreateUser() {
               name="senha"
               className="iptArea"
               placeholder=" Digite sua senha"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <Button
               style={{ borderRadius: "30px", border: "1px solid #336d0d" }}

@@ -1,4 +1,5 @@
-{
+{ 
+  "author": "Bruno Alves",
   "name": "sorocap-app",
   "version": "0.1.0",
   "private": true,

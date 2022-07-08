@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { Button, Spin } from "antd";
 import "./style.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigation = useNavigate();
-  const [loadings, setLoadings] = useState([]);
+
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
