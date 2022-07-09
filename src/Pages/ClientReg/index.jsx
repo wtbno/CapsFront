@@ -21,6 +21,7 @@ export default function RegisterUser() {
   const [corpName, setCorpName] = useState();
   const [cnpj, setCnpj] = useState();
   const [adress, setAdress] = useState();
+
   const navigation = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -33,8 +34,18 @@ export default function RegisterUser() {
     <>
       <NavBar />
       {isLoading ? (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Spin size="large" style={{ marginTop: "15rem" }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
+            src="/pillsLoad.gif"
+          />
         </div>
       ) : (
         <div

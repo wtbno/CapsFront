@@ -18,9 +18,19 @@ export default function Home() {
   return (
     <>
        {isLoading ? (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Spin size="large" style={{ marginTop: "15rem" }} />
-        </div>
+       <div
+       style={{
+         display: "flex",
+         flexDirection: "column",
+         justifyContent: "center",
+         alignItems: "center",
+       }}
+     >
+       <img
+         style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
+         src="/pillsLoad.gif"
+       />
+     </div>
       ) : (
         <div
           style={{ backgroundImage: "url(" + "bgimg2.jpg" + ")" }}

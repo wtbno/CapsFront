@@ -35,6 +35,15 @@ export default function NavBar() {
           }}
           style={barBtn}
         >
+          Novo Usuário
+        </Button>
+
+        <Button
+          onClick={() => {
+            navigation("/register");
+          }}
+          style={barBtn}
+        >
           Cadastro de clientes
         </Button>
         <Button

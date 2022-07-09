@@ -3,7 +3,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import CreateUser from "../Pages/CreateUser";
 import Home from "../Pages/Home";
 import Products from "../Pages/Products";
-import RegisterUser from "../Pages/RegisterUser";
+import RegisterUser from "../Pages/ClientReg";
 import TableControl from "../Pages/Chart";
 
 

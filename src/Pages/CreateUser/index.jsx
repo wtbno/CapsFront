@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Image, Spin } from "antd";
+import { Button, Input, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import NavBar from "../../Components/NavBar";
+
 import { EyeTwoTone } from "@ant-design/icons";
 
 const submitBtn = {
@@ -11,17 +11,18 @@ const submitBtn = {
   borderRadius: "10px",
 };
 
-const barBtn = {
-  color: "green",
-  border: "1px green solid",
-  borderRadius: "10px",
-  maxWidth: "50%",
-};
-
 export default function CreateUser() {
   const [name, setName] = useState();
-  const [userId, setUserId] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const [isValidName, setIsValidName] = useState('');
+
+  const handleName = () => {
+    if (name === '') {
+      setIsValidName(false)
+    }else setIsValidName(true)
+  }
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -41,11 +42,20 @@ export default function CreateUser() {
   const navigation = useNavigate();
   return (
     <>
-      <NavBar />
       {isLoading ? (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Spin size="large" style={{ marginTop: "15rem" }} />
-        </div>
+        <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
+          src="/pillsLoad.gif"
+        />
+      </div>
       ) : (
         <div
           style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
@@ -64,11 +74,11 @@ export default function CreateUser() {
             />
             <Input
               onChange={(e) => {
-                setUserId(e.target.value);
+                setEmail(e.target.value);
               }}
               className="iptArea"
               placeholder="Usuario"
-              value={userId}
+              value={email}
             />
             <Input
               EyeTwoTone
@@ -80,6 +90,7 @@ export default function CreateUser() {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              value={password}
             />
             <Button
               style={{ borderRadius: "30px", border: "1px solid #336d0d" }}
@@ -89,16 +100,28 @@ export default function CreateUser() {
               <EyeTwoTone />
             </Button>
 
-            <Button
-              onClick={() => {
-                navigation("/register");
-              }}
-              className="submitBtn"
-              style={submitBtn}
-              ghost
-            >
-              Cadastrar
-            </Button>
+            <div className="btnBox">
+              <Button
+                onClick={() => {
+                  navigation("/register");
+                }}
+                className="submitBtn"
+                style={submitBtn}
+                ghost
+              >
+                Cadastrar
+              </Button>
+              <Button
+                onClick={() => {
+                  navigation("/");
+                }}
+                className="submitBtn"
+                style={submitBtn}
+                ghost
+              >
+                Voltar
+              </Button>
+            </div>
           </div>
         </div>
       )}

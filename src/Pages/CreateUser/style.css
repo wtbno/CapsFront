@@ -46,3 +46,11 @@
 .userAdd {
   pointer-events: none;
 }
+
+.btnBox{
+
+  display: flex;
+  justify-content: space-evenly;
+  
+  width: 90%;
+}
