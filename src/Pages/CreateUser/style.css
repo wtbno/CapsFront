@@ -26,17 +26,14 @@
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  height: 70vh;
+  height: 80vh;
   max-width: 50%;
-  width: 30%;
+  width: 40%;
   border-radius: 10px;
-  padding: 5px;
   background-color: #e8f8e8;
 }
 
-.iptArea {
-  max-width: 50%;
-}
+
 
 .submitBtn {
   color: "green";
@@ -51,6 +48,6 @@
 
   display: flex;
   justify-content: space-evenly;
-  
-  width: 90%;
+  border: "1px #5fd solid";
+  width: 100%;
 }

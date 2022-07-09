@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Spin } from "antd";
+import { Button, Input, Checkbox, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-
-import { EyeTwoTone } from "@ant-design/icons";
+import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 
 const submitBtn = {
   color: "green",
@@ -11,18 +10,54 @@ const submitBtn = {
   borderRadius: "10px",
 };
 
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 80,
+    },
+  },
+};
+
+function checkInputs(inputs) {
+  var filled = true;
+
+  inputs.forEach(function (input) {
+    if (input.value === "") {
+      filled = false;
+    }
+  });
+
+  return filled;
+}
+var inputs = document.querySelectorAll("input");
+var button = document.querySelector("button");
+inputs.forEach(function (input) {
+  input.addEventListener("keyup", function () {
+    if (checkInputs(inputs)) {
+      button.disabled = false;
+    } else {
+      button.disabled = true;
+    }
+  });
+});
+
 export default function CreateUser() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const [isValidName, setIsValidName] = useState('');
+  const onFinish = (values) => {
+    console.log("Success:", values);
+  };
 
-  const handleName = () => {
-    if (name === '') {
-      setIsValidName(false)
-    }else setIsValidName(true)
-  }
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -44,84 +79,147 @@ export default function CreateUser() {
     <>
       {isLoading ? (
         <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img
-          style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
-          src="/pillsLoad.gif"
-        />
-      </div>
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
+            src="/pillsLoad.gif"
+          />
+        </div>
       ) : (
         <div
           style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
           className="root"
         >
           <div className="createUserBox">
-            <p>Criar novo usuário</p>
+            <h1>Criar novo usuário</h1>
+            <h4>Preencha todos os campos para continuar</h4>
             <img className="userAdd" src="/user1.png" />
-            <Input
-              onChange={(e) => {
-                setName(e.target.value);
+            <Form
+              name="basic"
+              labelCol={{
+                span: 80,
               }}
-              className="iptArea"
-              placeholder="Nome"
-              value={name}
-            />
-            <Input
-              onChange={(e) => {
-                setEmail(e.target.value);
+              wrapperCol={{
+                span: 160,
               }}
-              className="iptArea"
-              placeholder="Usuario"
-              value={email}
-            />
-            <Input
-              EyeTwoTone
-              type="password"
-              id="senha"
-              name="senha"
-              className="iptArea"
-              placeholder=" Digite sua senha"
-              onChange={(e) => {
-                setPassword(e.target.value);
+              initialValues={{
+                remember: true,
               }}
-              value={password}
-            />
-            <Button
-              style={{ borderRadius: "30px", border: "1px solid #336d0d" }}
-              type="ghost"
-              onClick={() => showPass()}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
             >
-              <EyeTwoTone />
-            </Button>
+              <Form.Item
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor insira seu nome!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  placeholder="Nome"
+                  value={name}
+                />
+              </Form.Item>
 
-            <div className="btnBox">
-              <Button
-                onClick={() => {
-                  navigation("/register");
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    type: "email",
+                    message: "E-mail inválido",
+                  },
+                  {
+                    required: true,
+                    message: "Insira seu E-mail!",
+                  },
+                ]}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
                 }}
-                className="submitBtn"
-                style={submitBtn}
-                ghost
               >
-                Cadastrar
-              </Button>
-              <Button
-                onClick={() => {
-                  navigation("/");
+                <Input
+                  prefix={<MailOutlined className="site-form-item-icon" />}
+                  name="email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  placeholder="Usuario.: Email"
+                  value={email}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Insira uma senha de 6 digitos",
+                  },
+                ]}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
                 }}
-                className="submitBtn"
-                style={submitBtn}
-                ghost
               >
-                Voltar
-              </Button>
-            </div>
+                <Input.Password
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  placeholder=" Digite sua senha"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  value={password}
+                />
+              </Form.Item>
+
+              <div className="btnBox">
+                <Form.Item {...tailFormItemLayout}>
+                  <Button
+                    onClick={() => {
+                      navigation("/products");
+                    }}
+                    disabled="disabled"
+                    style={submitBtn}
+                    type="primary"
+                    htmlType="submit"
+                    ghost
+                  >
+                    Salvar
+                  </Button>
+                </Form.Item>
+
+                <Button
+                  onClick={() => {
+                    navigation("/");
+                  }}
+                  className="submitBtn"
+                  style={submitBtn}
+                  ghost
+                >
+                  Voltar
+                </Button>
+              </div>
+            </Form>
           </div>
         </div>
       )}
