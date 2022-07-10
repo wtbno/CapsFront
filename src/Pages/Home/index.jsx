@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../Context/auth";
 
 import { Button, Form, Checkbox, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
@@ -13,13 +14,13 @@ const submitBtn = {
 };
 
 export default function Home() {
-  // const {authenticated, login} = useContext(AuthContext)
+  const {authenticated, login} = useContext(AuthContext)
   const navigation = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState()
   const onFinish = (values) => {
     console.log("Dados recebidos: ", {email, password}, values);
-    // login(email, password)
+    login(email, password) //integ. context e API
   };
 
   const [isLoading, setIsLoading] = useState(true);
@@ -51,6 +52,7 @@ export default function Home() {
           className="root"
         >
           <div className="LoginMenu">
+            <p>{String(authenticated)}</p>
             <Form
               name="normal_login"
               className="login-form"
