@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Checkbox, Form } from "antd";
+import { Button, Input, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
@@ -23,28 +23,7 @@ const tailFormItemLayout = {
   },
 };
 
-function checkInputs(inputs) {
-  var filled = true;
 
-  inputs.forEach(function (input) {
-    if (input.value === "") {
-      filled = false;
-    }
-  });
-
-  return filled;
-}
-var inputs = document.querySelectorAll("input");
-var button = document.querySelector("button");
-inputs.forEach(function (input) {
-  input.addEventListener("keyup", function () {
-    if (checkInputs(inputs)) {
-      button.disabled = false;
-    } else {
-      button.disabled = true;
-    }
-  });
-});
 
 export default function CreateUser() {
   const [name, setName] = useState();
@@ -66,14 +45,7 @@ export default function CreateUser() {
     }, 800);
   }, []);
 
-  function showPass() {
-    const tipo = document.getElementById("senha");
-    if (tipo.type === "password") {
-      tipo.type = "text";
-    } else {
-      tipo.type = "password";
-    }
-  }
+ 
   const navigation = useNavigate();
   return (
     <>
@@ -195,10 +167,10 @@ export default function CreateUser() {
               <div className="btnBox">
                 <Form.Item {...tailFormItemLayout}>
                   <Button
-                    onClick={() => {
-                      navigation("/products");
+                     onClick={() => {
+                      navigation("/");
                     }}
-                    disabled="disabled"
+                   
                     style={submitBtn}
                     type="primary"
                     htmlType="submit"

@@ -31,3 +31,11 @@ p {
   border-radius: 10px;
   max-width: 60%;
 }
+
+.loginBox {
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
