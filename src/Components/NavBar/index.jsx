@@ -1,7 +1,10 @@
-import { Button, Input, Image } from "antd";
-import React from "react";
+import React, {useContext} from "react";
+import { AuthContext } from "../../Context/auth";
+import { Button} from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+
+
 
 const submitBtn = {
   color: "green",
@@ -17,18 +20,11 @@ const barBtn = {
 };
 
 export default function NavBar() {
+  
   const navigation = useNavigate();
   return (
     <>
       <div className="navBar">
-        <img
-          onClick={() => {
-            navigation("/");
-          }}
-          className="pillsimg"
-          src="/pills3.png"
-        />
-
         <Button
           onClick={() => {
             navigation("/create");
@@ -62,6 +58,22 @@ export default function NavBar() {
         >
           Cadastro de pedidos
         </Button>
+        <a
+          style={{
+            display: "flex",
+            flexDirection: "column-reverse",
+            alignItems: "center",
+          }}
+        >
+          Sair
+          <img
+            onClick={() => {
+              navigation("/");
+            }}
+            className="pillsimg"
+            src="/pills3.png"
+          />
+        </a>
       </div>
     </>
   );
