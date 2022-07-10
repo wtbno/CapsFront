@@ -1,12 +1,12 @@
-
 import './App.css';
+import MainRoutes from './Routes';
 
-import Login from './Pages/Home';
+
 
 function App() {
   return (
     <div className="App">
-  
+<MainRoutes/>
     </div>
   );
 }

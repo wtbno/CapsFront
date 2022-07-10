@@ -5,14 +5,13 @@ import Products from "../Pages/Products";
 import RegisterUser from "../Pages/ClientReg";
 import TableControl from "../Pages/Chart";
 import Home from "../Pages/Home";
-import { AuthProvicer } from "../Context/auth";
+import { AuthProvider } from "../Context/auth";
 
 export default function MainRoutes() {
-  
   return (
     <>
       <Router>
-       <AuthProvicer>
+        <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<CreateUser />} />
@@ -20,7 +19,7 @@ export default function MainRoutes() {
             <Route path="/products" element={<Products />} />
             <Route path="/chart" element={<TableControl />} />
           </Routes>
-          </AuthProvicer>
+        </AuthProvider>
       </Router>
     </>
   );

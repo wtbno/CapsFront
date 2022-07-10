@@ -6,7 +6,6 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 
-
 const submitBtn = {
   color: "green",
   border: "1px green solid",
@@ -14,13 +13,18 @@ const submitBtn = {
 };
 
 export default function Home() {
-  const {authenticated, login} = useContext(AuthContext)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit");
+  };
+
+  const { authenticated, login } = useContext(AuthContext);
   const navigation = useNavigate();
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState();
   const onFinish = (values) => {
-    console.log("Dados recebidos: ", {email, password}, values);
-    login(email, password) //integ. context e API
+    console.log("Dados recebidos: ", { email, password }, values);
+    login(email, password); //integ. context e API
   };
 
   const [isLoading, setIsLoading] = useState(true);
@@ -62,6 +66,10 @@ export default function Home() {
               onFinish={onFinish}
             >
               <Form.Item
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                value={email}
                 name="username"
                 rules={[
                   {
@@ -76,6 +84,10 @@ export default function Home() {
                 />
               </Form.Item>
               <Form.Item
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                value={password}
                 name="password"
                 rules={[
                   {
