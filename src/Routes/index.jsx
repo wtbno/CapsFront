@@ -8,13 +8,13 @@ import Home from "../Pages/Home";
 import { AuthProvider, AuthContext } from "../Context/auth";
 
 export default function MainRoutes() {
-  const Private = (children) =>{
+  const Private = ({children}) =>{
     const {authenticated} = useContext(AuthContext);
 
     if(!authenticated){
       return <Navigate to='/'/>
     }
-    return children;
+    return children; 
   };
   return (
     <>
