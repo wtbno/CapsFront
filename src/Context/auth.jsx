@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     console.log("login auth", { email, password });
     if (password === "000") {
       setUser({ id: "123", email }); //Fake user
-      navigate("/products");
+      navigate("/register");
     }
   };
   const logout = () => {

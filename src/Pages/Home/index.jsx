@@ -56,7 +56,8 @@ export default function Home() {
           className="root"
         >
           <div className="LoginMenu">
-            <p>{String(authenticated)}</p>
+            <h1>Login</h1>
+            {/* <p>{String(authenticated)}</p> */}
             <Form
               name="normal_login"
               className="login-form"
