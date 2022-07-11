@@ -5,6 +5,7 @@ import { Button, Form, Checkbox, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 const submitBtn = {
   color: "green",
@@ -28,11 +29,33 @@ export default function Home() {
   };
 
   const [isLoading, setIsLoading] = useState(true);
+  const [value, setValue] = useState();
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 800);
   }, []);
+
+  useEffect(() => {
+    api.put(() => "/firstcht".saveId()).then((res) => res.data);
+
+    setValue("email ", email);
+    setValue("password", password);
+  }, [api]);
+
+  const handleSendData = async () => {
+    try {
+      const data = {
+        email,
+        password,
+      };
+      const response = await api.post("/", data);
+      console.log(data, "data log");
+      if (response.status === 201) navigation("/docs");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -111,6 +134,9 @@ export default function Home() {
 
               <Form.Item className="loginBox">
                 <Button
+                  onClick={() => {
+                    handleSendData();
+                  }}
                   style={submitBtn}
                   ghost
                   type="primary"
