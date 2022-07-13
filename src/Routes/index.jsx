@@ -17,7 +17,7 @@ export default function MainRoutes() {
     const { authenticated, loading } = useContext(AuthContext);
 
     if (loading) {
-      return <div className="loading"/>
+      return <div className="loading" />;
     }
 
     if (!authenticated) {
@@ -31,38 +31,10 @@ export default function MainRoutes() {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/create"
-              element={
-                <Private>
-                  <CreateUser />
-                </Private>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <Private>
-                  <RegisterUser />
-                </Private>
-              }
-            />
-            <Route
-              path="/products"
-              element={
-                <Private>
-                  <Products />
-                </Private>
-              }
-            />
-            <Route
-              path="/chart"
-              element={
-                <Private>
-                  <TableControl />
-                </Private>
-              }
-            />
+            <Route path="/create" element={<CreateUser />} />
+            <Route path="/register" element={<RegisterUser />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/chart" element={<TableControl />} />
           </Routes>
         </AuthProvider>
       </Router>

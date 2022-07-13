@@ -37,7 +37,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    api.put(() => "/firstcht".saveId()).then((res) => res.data);
+    api.put(() => "/".saveId()).then((res) => res.data);
 
     setValue("email ", email);
     setValue("password", password);
@@ -51,7 +51,7 @@ export default function Home() {
       };
       const response = await api.post("/", data);
       console.log(data, "data log");
-      if (response.status === 201) navigation("/docs");
+      if (response.status === 201) navigation("/chart");
     } catch (error) {
       console.log(error);
     }

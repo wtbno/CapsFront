@@ -3,6 +3,7 @@ import { Button, Input, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
+import { api } from "../../services/api";
 
 const submitBtn = {
   color: "green",
@@ -29,6 +30,7 @@ export default function CreateUser() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [value, setValue] = useState();
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -44,7 +46,29 @@ export default function CreateUser() {
       setIsLoading(false);
     }, 800);
   }, []);
+  useEffect(() => {
+    api.put(() => "/createUser".saveId()).then((res) => res.data);
 
+    setValue("email ", email);
+    setValue("password", password);
+    setValue("name", name);
+  }, [api]);
+
+  const handleSendData = async () => {
+    try {
+      const data = {
+        name,
+        email,
+        password,
+      
+      };
+      const response = await api.post("/user-create", data);
+      console.log(data, "data log");
+      if (response.status === 201) navigation("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
  
   const navigation = useNavigate();
   return (
@@ -182,6 +206,7 @@ export default function CreateUser() {
 
                 <Button
                   onClick={() => {
+                    handleSendData();
                     navigation("/");
                   }}
                   className="submitBtn"

@@ -24,6 +24,7 @@ export default function RegisterUser() {
 
   const navigation = useNavigate();
 
+  
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
