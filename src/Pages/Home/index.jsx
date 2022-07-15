@@ -36,7 +36,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    api.post(() => "/users".saveId()).then((res) => res.data);
+    api.post(() => "/login".saveId()).then((res) => res.data);
 
     setValue("email ", email);
     setValue("password", password);
@@ -44,16 +44,16 @@ export default function Home() {
 
   const handleSendData = async () => {
     try {
-      alert('Login')
+      alert("Login");
       const data = {
         email,
         password,
       };
-      const response = await api.post("/users", data);
+      const response = await api.post("/login", data);
       console.log(data, "data log");
-      if (response.status === 201) navigation("/chart");
+      if (response.status === 201) navigation("/register");
     } catch (error) {
-      console.log('Algo deu errado' + error);
+      console.log("Algo deu errado" + error);
     }
   };
 
@@ -126,7 +126,6 @@ export default function Home() {
                   placeholder="Password"
                 />
               </Form.Item>
-             
 
               <Form.Item className="loginBox">
                 <Button

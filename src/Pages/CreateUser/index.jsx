@@ -46,7 +46,7 @@ export default function CreateUser() {
     }, 800);
   }, []);
   useEffect(() => {
-    api.post(() => "/newUser".saveId()).then((res) => res.data);
+    api.post(() => "/novo".saveId()).then((res) => res.data);
     setValue("email ", email);
     setValue("password", password);
     setValue("name", name);
@@ -59,7 +59,7 @@ export default function CreateUser() {
         email,
         password,
       };
-      const response = await api.post("/newUser", data);
+      const response = await api.post("/novo", data);
       console.log(data, "data log");
       if (response.status === 201) navigation("/");
     } catch (error) {
