@@ -36,7 +36,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    api.put(() => "/users".saveId()).then((res) => res.data);
+    api.post(() => "/users".saveId()).then((res) => res.data);
 
     setValue("email ", email);
     setValue("password", password);
@@ -44,15 +44,16 @@ export default function Home() {
 
   const handleSendData = async () => {
     try {
+      alert('Login')
       const data = {
         email,
         password,
       };
-      const response = await api.post("/auth/login", data);
+      const response = await api.post("/users", data);
       console.log(data, "data log");
       if (response.status === 201) navigation("/chart");
     } catch (error) {
-      console.log(error);
+      console.log('Algo deu errado' + error);
     }
   };
 

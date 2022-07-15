@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { api } from "../../services/api";
-import * as yup from 'yup';
+import * as yup from "yup";
 
 const submitBtn = {
   color: "green",
@@ -24,8 +24,6 @@ const tailFormItemLayout = {
     },
   },
 };
-
-
 
 export default function CreateUser() {
   const [name, setName] = useState();
@@ -60,7 +58,6 @@ export default function CreateUser() {
         name,
         email,
         password,
-      
       };
       const response = await api.post("/newUser", data);
       console.log(data, "data log");
@@ -69,7 +66,7 @@ export default function CreateUser() {
       console.log(error);
     }
   };
- 
+
   const navigation = useNavigate();
   return (
     <>
@@ -191,10 +188,9 @@ export default function CreateUser() {
               <div className="btnBox">
                 <Form.Item {...tailFormItemLayout}>
                   <Button
-                     onClick={() => {
+                    onClick={() => {
                       navigation("/");
                     }}
-                   
                     style={submitBtn}
                     type="primary"
                     htmlType="submit"
