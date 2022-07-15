@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { api } from "../../services/api";
+import * as yup from 'yup';
 
 const submitBtn = {
   color: "green",
@@ -47,8 +48,7 @@ export default function CreateUser() {
     }, 800);
   }, []);
   useEffect(() => {
-    api.put(() => "/createUser".saveId()).then((res) => res.data);
-
+    api.post(() => "/newUser".saveId()).then((res) => res.data);
     setValue("email ", email);
     setValue("password", password);
     setValue("name", name);
@@ -62,7 +62,7 @@ export default function CreateUser() {
         password,
       
       };
-      const response = await api.post("/user-create", data);
+      const response = await api.post("/newUser", data);
       console.log(data, "data log");
       if (response.status === 201) navigation("/");
     } catch (error) {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../Context/auth";
 import { Button, Form, Checkbox, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./style.css";
@@ -12,19 +11,30 @@ const submitBtn = {
   borderRadius: "10px",
 };
 
+function initialState() {
+  return { user: "", password: "" };
+}
+
 export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit");
   };
+  const [user, setUser] = useState('');
+  function onChange(event) {
+    const { value, name } = event.target;
+    setValues({ ...values, [name]: value });
+  }
 
-  const { authenticated, login } = useContext(AuthContext);
+  const [values, setValues] = useState(initialState);
+
+  const  login  = useContext('');
   const navigation = useNavigate();
-  const [email, setEmail] = useState();
+
   const [password, setPassword] = useState();
   const onFinish = (values) => {
-    console.log("Dados recebidos: ", { email, password }, values);
-    login(email, password); //integ. context e API
+    console.log("Dados recebidos: ", { user, password }, values);
+    login(user, password); //integ. context e API
   };
 
   const [isLoading, setIsLoading] = useState(true);
@@ -36,16 +46,16 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    api.put(() => "/users".saveId()).then((res) => res.data);
+    api.put(() => "/auth/login".saveId()).then((res) => res.data);
 
-    setValue("email ", email);
+    setValue("user ", user);
     setValue("password", password);
   }, [api]);
 
   const handleSendData = async () => {
     try {
       const data = {
-        email,
+        user,
         password,
       };
       const response = await api.post("/auth/login", data);
@@ -89,11 +99,9 @@ export default function Home() {
               onFinish={onFinish}
             >
               <Form.Item
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                value={email}
-                name="email"
+                onChange={onChange}
+                value={values.user}
+                name="username"
                 rules={[
                   {
                     required: true,
@@ -107,10 +115,8 @@ export default function Home() {
                 />
               </Form.Item>
               <Form.Item
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                value={password}
+                onChange={onChange}
+                value={values.password}
                 name="password"
                 rules={[
                   {
@@ -125,7 +131,11 @@ export default function Home() {
                   placeholder="Password"
                 />
               </Form.Item>
-             
+              <Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+              </Form.Item>
 
               <Form.Item className="loginBox">
                 <Button
