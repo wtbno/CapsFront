@@ -17,6 +17,7 @@ const barBtn = {
   border: "1px green solid",
   borderRadius: "10px",
   maxWidth: "50%",
+  boxShadow:"0 -1px 8px 1px rgba(0,0,0,0.5) "
 };
 
 export default function NavBar() {
@@ -25,15 +26,7 @@ export default function NavBar() {
   return (
     <>
       <div className="navBar">
-        <Button
-          onClick={() => {
-            navigation("/create");
-          }}
-          style={barBtn}
-        >
-          Novo Usuário
-        </Button>
-
+       
         <Button
           onClick={() => {
             navigation("/register");
@@ -56,7 +49,7 @@ export default function NavBar() {
           }}
           style={barBtn}
         >
-          Cadastro de pedidos
+          Tabela de pedidos
         </Button>
         <a
           style={{

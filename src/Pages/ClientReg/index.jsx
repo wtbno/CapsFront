@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Input, Image, Spin } from "antd";
+import { Button, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import NavBar from "../../Components/NavBar";
+import { api } from "../../services/api";
 
 const submitBtn = {
   color: "green",
@@ -18,13 +19,40 @@ const barBtn = {
 };
 
 export default function RegisterUser() {
+  const navigation = useNavigate();
+  //States do formulário
   const [corpName, setCorpName] = useState();
   const [cnpj, setCnpj] = useState();
   const [adress, setAdress] = useState();
 
-  const navigation = useNavigate();
+  const [value, setValue] = useState();
 
-  
+  //API
+  useEffect(() => {
+    api.post(() => "/client".saveId()).then((res) => res.data);
+
+    setValue("corpName ", corpName);
+    setValue("cnpj", cnpj);
+    setValue("adress", adress);
+  }, [api]);
+
+  const handleSendData = async (e) => {
+    try {
+      alert("Cliente registrado");
+      const data = {
+        corpName,
+        cnpj,
+        adress,
+      };
+      const response = await api.post("/client", data);
+      console.log(data, "data log");
+      if (response.status === 201);
+    } catch (error) {
+      alert("Login não realizado " + error);
+      console.log("Algo deu errado" + error);
+    }
+  };
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -84,13 +112,23 @@ export default function RegisterUser() {
             />
             <Button
               onClick={() => {
-                navigation("/products");
+               
               }}
               className="submitBtn"
               style={submitBtn}
               ghost
             >
               Cadastrar
+            </Button>
+            <Button
+              onClick={() => {
+                navigation("/products");
+              }}
+              className="submitBtn"
+              style={submitBtn}
+              ghost
+            >
+              Avançar
             </Button>
           </div>
         </div>

@@ -26,10 +26,13 @@ const tailFormItemLayout = {
 };
 
 export default function CreateUser() {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const navigation = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [form, setForm] = useState('');
   const [value, setValue] = useState();
+  const [loading, setLoading] = useState()
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -45,6 +48,8 @@ export default function CreateUser() {
       setIsLoading(false);
     }, 800);
   }, []);
+
+  //API
   useEffect(() => {
     api.post(() => "/novo".saveId()).then((res) => res.data);
     setValue("email ", email);
@@ -52,22 +57,30 @@ export default function CreateUser() {
     setValue("name", name);
   }, [api]);
 
-  const handleSendData = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
+      setLoading(true)
+      
       const data = {
         name,
         email,
         password,
       };
+     
       const response = await api.post("/novo", data);
-      console.log(data, "data log");
+      console.log(data, "Usuário criado");
       if (response.status === 201) navigation("/");
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao criar usuário" + error);
     }
   };
+  console.log(name, email, password, "TESTE" );
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
-  const navigation = useNavigate();
+
   return (
     <>
       {isLoading ? (
@@ -91,7 +104,7 @@ export default function CreateUser() {
         >
           <div className="createUserBox">
             <h1>Criar novo usuário</h1>
-            <h4>Preencha todos os campos para continuar</h4>
+            <h4>Preencha todos os campos e clique em salvar</h4>
             <img className="userAdd" src="/user1.png" />
             <Form
               name="basic"
@@ -125,6 +138,7 @@ export default function CreateUser() {
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   onChange={(e) => {
                     setName(e.target.value);
+                    handleChange(e.target.value);
                   }}
                   placeholder="Nome"
                   value={name}
@@ -153,6 +167,7 @@ export default function CreateUser() {
                   name="email"
                   onChange={(e) => {
                     setEmail(e.target.value);
+                    handleChange(e.target.value);
                   }}
                   placeholder="Usuario.: Email"
                   value={email}
@@ -180,6 +195,7 @@ export default function CreateUser() {
                   placeholder=" Digite sua senha"
                   onChange={(e) => {
                     setPassword(e.target.value);
+                    handleChange(e.target.value);
                   }}
                   value={password}
                 />
@@ -188,8 +204,10 @@ export default function CreateUser() {
               <div className="btnBox">
                 <Form.Item {...tailFormItemLayout}>
                   <Button
-                    onClick={() => {
+                    onClick={(e) => {
                       navigation("/");
+                      handleChange(e.target.value);
+                      
                     }}
                     style={submitBtn}
                     type="primary"
@@ -202,7 +220,6 @@ export default function CreateUser() {
 
                 <Button
                   onClick={() => {
-                    handleSendData();
                     navigation("/");
                   }}
                   className="submitBtn"

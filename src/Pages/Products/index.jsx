@@ -11,8 +11,6 @@ const submitBtn = {
   borderRadius: "10px",
 };
 
-
-
 export default function Products() {
   const [productCode, setProductCode] = useState("");
   const [productDesc, setProductDesc] = useState("");
@@ -38,8 +36,6 @@ export default function Products() {
     }, 800);
   }, []);
 
-
-
   useEffect(() => {
     api.post(() => "/product".saveId()).then((res) => res.data);
 
@@ -48,18 +44,17 @@ export default function Products() {
     setValue("buyPrice ", buyPrice);
     setValue("salePrice", salePrice);
     setValue("unitMeas ", unitMeas);
-  
   }, [api]);
 
   const handleSendData = async () => {
     try {
-      alert("Login");
+    
       const data = {
         productCode,
         productDesc,
         buyPrice,
         salePrice,
-        unitMeas
+        unitMeas,
       };
       const response = await api.post("/product", data);
       console.log(data, "data log");
@@ -74,18 +69,18 @@ export default function Products() {
       <NavBar />
       {isLoading ? (
         <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img
-          style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
-          src="/pillsLoad.gif"
-        />
-      </div>
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            style={{ width: "150px", marginTop: "15rem", left: "5rem" }}
+            src="/pillsLoad.gif"
+          />
+        </div>
       ) : (
         <div
           style={{ backgroundImage: "url(" + "dnapills.png" + ")" }}
@@ -123,12 +118,13 @@ export default function Products() {
             <Input
               onChange={(e) => setSalePrice(currencyFormater(e.target.value))}
               className="iptArea"
-              placeholder="Preço de Venda R$"
+              placeholder="Valor de Venda R$"
               value={salePrice}
             />
 
             <Button
-              onClick={() => {
+              onClick={(e) => {
+                handleSendData(e.target.value)
                 navigation("/chart");
               }}
               className="submitBtn"
@@ -136,6 +132,28 @@ export default function Products() {
               ghost
             >
               Cadastrar
+            </Button>
+            <Button
+              onClick={(e) => {
+                handleSendData(e.target.value)
+                
+              }}
+              className="submitBtn"
+              style={submitBtn}
+              ghost
+            >
+              Cadastrar
+            </Button>
+            <Button
+              onClick={(e) => {
+                handleSendData(e.target.value)
+                navigation("/chart");
+              }}
+              className="submitBtn"
+              style={submitBtn}
+              ghost
+            >
+              Avançar 
             </Button>
           </div>
         </div>

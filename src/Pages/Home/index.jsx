@@ -13,28 +13,37 @@ const submitBtn = {
 };
 
 export default function Home() {
+  const navigation = useNavigate();
+  const { authenticated, login } = useContext(AuthContext);
+  const [loading, setLoading] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  //States do formulário
+  const [value, setValue] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit");
   };
-
-  const { authenticated, login } = useContext(AuthContext);
-  const navigation = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const handleChange = (e) => {
+    console.log("Digitando...", e.target.name, e.target.value);
+  };
   const onFinish = (values) => {
     console.log("Dados recebidos: ", { email, password }, values);
     login(email, password); //integ. context e API
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [value, setValue] = useState();
+  //UseEffect
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 800);
   }, []);
 
+
+  //API
   useEffect(() => {
     api.post(() => "/login".saveId()).then((res) => res.data);
 
@@ -42,9 +51,10 @@ export default function Home() {
     setValue("password", password);
   }, [api]);
 
-  const handleSendData = async () => {
+  const handleSendData = async (e) => {
+
     try {
-      alert("Login");
+      alert("Login efetuado");
       const data = {
         email,
         password,
@@ -53,9 +63,12 @@ export default function Home() {
       console.log(data, "data log");
       if (response.status === 201) navigation("/register");
     } catch (error) {
+      alert("Login não realizado " + error)
       console.log("Algo deu errado" + error);
     }
   };
+
+ 
 
   return (
     <>
@@ -103,14 +116,16 @@ export default function Home() {
                 ]}
               >
                 <Input
+                     onChange={(e) => {
+                      setPassword(e.target.value);
+                      handleChange();
+                    }}
                   placeholder="Email"
                   prefix={<UserOutlined className="site-form-item-icon" />}
                 />
               </Form.Item>
               <Form.Item
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+           
                 value={password}
                 name="password"
                 rules={[
@@ -121,6 +136,10 @@ export default function Home() {
                 ]}
               >
                 <Input.Password
+                     onChange={(e) => {
+                      setPassword(e.target.value);
+                      handleChange();
+                    }}
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
