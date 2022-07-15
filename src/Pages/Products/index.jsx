@@ -133,17 +133,7 @@ export default function Products() {
             >
               Cadastrar
             </Button>
-            <Button
-              onClick={(e) => {
-                handleSendData(e.target.value)
-                
-              }}
-              className="submitBtn"
-              style={submitBtn}
-              ghost
-            >
-              Cadastrar
-            </Button>
+           
             <Button
               onClick={(e) => {
                 handleSendData(e.target.value)
